@@ -1,6 +1,8 @@
 // Copyrights JasonChoi(SEONG_CHAN) 2019
 
+
 #include "Unreal_BattleTank/Public/TankPlayerController.h"
+#include "Unreal_BattleTank/Public/Tank.h"
 
 
 void ATankPlayerController::Tick(float DeltaTime)

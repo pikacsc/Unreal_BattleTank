@@ -1,6 +1,7 @@
 // Copyrights JasonChoi(SEONG_CHAN) 2019
 
 #include "Unreal_BattleTank/Public/Tank.h"
+#include "Unreal_BattleTank/Public/TankAimingComponent.h"
 
 void ATank::SetBarrelReference(UTankBarrel * _BarrelToSet)
 {

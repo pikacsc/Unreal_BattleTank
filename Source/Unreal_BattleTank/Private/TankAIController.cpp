@@ -1,7 +1,7 @@
 // Copyrights JasonChoi(SEONG_CHAN) 2019
 
 #include "Unreal_BattleTank/Public/TankAIController.h"
-
+#include "Unreal_BattleTank/Public/Tank.h"
 #include "Engine/World.h"
 
 void ATankAIController::BeginPlay()
