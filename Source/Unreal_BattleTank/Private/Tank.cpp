@@ -18,9 +18,9 @@ void ATank::BeginPlay()
 }
 
 // Called every frame
-void ATank::Tick(float DeltaTime)
+void ATank::Tick(float _fDeltaTime)
 {
-	Super::Tick(DeltaTime);
+	Super::Tick(_fDeltaTime);
 
 }
 
