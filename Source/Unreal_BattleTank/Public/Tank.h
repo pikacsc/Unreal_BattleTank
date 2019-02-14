@@ -7,6 +7,8 @@
 #include "TankAimingComponent.h"
 #include "Tank.generated.h"
 
+class UTankBarrel;
+
 UCLASS()
 class UNREAL_BATTLETANK_API ATank : public APawn
 {
@@ -16,10 +18,10 @@ public:
 	void AimAt(FVector _HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UStaticMeshComponent* _BarrelToSet);
+	void SetBarrelReference(UTankBarrel* _BarrelToSet);
 
 protected:
-	UTankAimingComponent* TankAimingComponent = nullptr;
+	UTankAimingComponent* m_TankAimingComponent = nullptr;
 
 private:
 	// Sets default values for this pawn's properties
@@ -34,5 +36,8 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* _PlayerInputComponent) override;
 
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float m_LaunchSpeed = 100000.f; //TODO find sensible default
 
 };
