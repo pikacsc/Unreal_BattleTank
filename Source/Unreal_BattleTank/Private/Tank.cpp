@@ -2,18 +2,23 @@
 
 #include "Unreal_BattleTank/Public/Tank.h"
 
+void ATank::SetBarrelReference(UStaticMeshComponent * _BarrelToSet)
+{
+	TankAimingComponent->SetBarrelReference(_BarrelToSet);
+}
+
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 }
 
 void ATank::AimAt(FVector _HitLocation)
 {
-	auto OurTankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *OurTankName, *_HitLocation.ToString());
+	TankAimingComponent->AimAt(_HitLocation);
 }
 
 
@@ -32,9 +37,9 @@ void ATank::Tick(float _fDeltaTime)
 }
 
 // Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ATank::SetupPlayerInputComponent(UInputComponent* _PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	Super::SetupPlayerInputComponent(_PlayerInputComponent);
+	
 }
 
