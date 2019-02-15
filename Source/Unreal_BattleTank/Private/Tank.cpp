@@ -19,19 +19,19 @@ void ATank::SetTurretReference(UTankTurret * _TurretToSet)
 
 void ATank::Fire()
 {
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: Tank fires"), Time);
-
+	
 	if (!m_Barrel) { 
 		UE_LOG(LogTemp, Error, TEXT("Barrel object is missing"));
 		return; 
 	}
 	// Spawn a projectile at the socket location on the barrel
-	GetWorld()->SpawnActor<AProjectile>(
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			m_ProjectileBlueprint,
 			m_Barrel->GetSocketLocation(FName("Projectile")),
 			m_Barrel->GetSocketRotation(FName("Projectile"))
 		);
+
+	Projectile->LaunchProjectile(m_LaunchSpeed);
 }
 
 // Sets default values
