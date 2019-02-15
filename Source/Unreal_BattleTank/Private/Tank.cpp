@@ -8,6 +8,11 @@ void ATank::SetBarrelReference(UTankBarrel * _BarrelToSet)
 	m_TankAimingComponent->SetBarrelReference(_BarrelToSet);
 }
 
+void ATank::SetTurretReference(UTankTurret * _TurretToSet)
+{
+	m_TankAimingComponent->SetTurretReference(_TurretToSet);
+}
+
 // Sets default values
 ATank::ATank()
 {

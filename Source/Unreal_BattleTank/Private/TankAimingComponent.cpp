@@ -3,6 +3,7 @@
 #include "Unreal_BattleTank/Public/TankAimingComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Unreal_BattleTank/Public/TankBarrel.h"
+#include "Unreal_BattleTank/Public/TankTurret.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Actor.h"
 
@@ -12,14 +13,21 @@ UTankAimingComponent::UTankAimingComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
-	PrimaryComponentTick.bCanEverTick = true; // TODO Should this really tick?
+	PrimaryComponentTick.bCanEverTick = false; // TODO Should this really tick?
 	// ...
 }
 
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel * _BarrelToSet)
 {
-	m_Barrel = BarrelToSet;
+	if (!_BarrelToSet) { return; }
+	m_Barrel = _BarrelToSet;
+}
+
+void UTankAimingComponent::SetTurretReference(UTankTurret * _TurretToSet)
+{
+	if (!_TurretToSet) { return; }
+	m_Turret = _TurretToSet;
 }
 
 
@@ -67,11 +75,7 @@ void UTankAimingComponent::MoveBarrel(FVector _AimDirection)
 	auto AimAsRotator = _AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	m_Barrel->Elevate(DeltaRotator.Pitch); // TODO remove magic number
-
-	//Move the barrel the right amount this frame
-
-
-	//Given a max elevation speed, and the frame time
+	m_Turret->Rotate(DeltaRotator.Yaw);
 }
 
 
