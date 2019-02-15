@@ -1,6 +1,7 @@
 // Copyrights JasonChoi(SEONG_CHAN) 2019
 
 #include "Unreal_BattleTank/Public/Tank.h"
+#include "Engine/World.h"
 #include "Unreal_BattleTank/Public/TankAimingComponent.h"
 
 void ATank::SetBarrelReference(UTankBarrel * _BarrelToSet)
@@ -11,6 +12,12 @@ void ATank::SetBarrelReference(UTankBarrel * _BarrelToSet)
 void ATank::SetTurretReference(UTankTurret * _TurretToSet)
 {
 	m_TankAimingComponent->SetTurretReference(_TurretToSet);
+}
+
+void ATank::Fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Tank fires"), Time);
 }
 
 // Sets default values
