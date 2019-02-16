@@ -18,11 +18,10 @@ class UNREAL_BATTLETANK_API ATankAIController : public AAIController
 	GENERATED_BODY()
 
 private:
-	ATank* GetControlledTank() const;
-	
-	ATank* GetPlayerTank() const;
+	ATank* m_AITank = nullptr;
+	ATank* m_PlayerTank = nullptr;
 
-	virtual void BeginPlay() override;
+	virtual void BeginPlay();
 
 	// Called every frame
 	virtual void Tick(float _fDeltaTime) override;

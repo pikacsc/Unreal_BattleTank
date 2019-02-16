@@ -19,19 +19,24 @@ void ATank::SetTurretReference(UTankTurret * _TurretToSet)
 
 void ATank::Fire()
 {
-	
+	bool isReloaded = (FPlatformTime::Seconds() - m_dLastFireTime) > m_fReloadTimeInSeconds; // Fire delay
 	if (!m_Barrel) { 
 		UE_LOG(LogTemp, Error, TEXT("Barrel object is missing"));
 		return; 
 	}
-	// Spawn a projectile at the socket location on the barrel
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+	if (isReloaded)
+	{
+		// Spawn a projectile at the socket location on the barrel
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			m_ProjectileBlueprint,
 			m_Barrel->GetSocketLocation(FName("Projectile")),
 			m_Barrel->GetSocketRotation(FName("Projectile"))
-		);
+			);
 
-	Projectile->LaunchProjectile(m_LaunchSpeed);
+		Projectile->LaunchProjectile(m_LaunchSpeed);
+		m_dLastFireTime = FPlatformTime::Seconds(); // reset fire delay
+	}
+	
 }
 
 // Sets default values
