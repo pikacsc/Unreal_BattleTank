@@ -5,6 +5,7 @@
 #include "Projectile.h"
 #include "Engine/World.h"
 #include "Unreal_BattleTank/Public/TankAimingComponent.h"
+#include "Unreal_BattleTank/Public/TankMovementComponent.h"
 
 void ATank::SetBarrelReference(UTankBarrel * _BarrelToSet)
 {
