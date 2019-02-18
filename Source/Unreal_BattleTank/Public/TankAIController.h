@@ -21,9 +21,13 @@ private:
 	ATank* m_AITank = nullptr;
 	ATank* m_PlayerTank = nullptr;
 
+	// How close can the AI tank get to the player
+	float  m_AcceptanceRadius = 3000.f;
+
 	virtual void BeginPlay();
 
 	// Called every frame
 	virtual void Tick(float _fDeltaTime) override;
+
 
 };
