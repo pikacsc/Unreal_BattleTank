@@ -25,6 +25,13 @@ void ATank::Fire()
 	
 }
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay(); // Needed for BP Begin play to Run
+
+	m_TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
+}
+
 // Sets default values
 ATank::ATank()
 {

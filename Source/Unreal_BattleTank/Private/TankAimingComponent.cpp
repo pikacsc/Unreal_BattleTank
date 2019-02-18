@@ -27,10 +27,7 @@ void UTankAimingComponent::Initialize(UTankBarrel * _BarrelToSet, UTankTurret * 
 
 void UTankAimingComponent::AimAt(FVector _HitLocation, float _LaunchSpeed)
 {
-	if (!ensure(m_Barrel)) { 
-		UE_LOG(LogTemp, Error, TEXT("No barrel object"));
-		return; 
-	}
+	if (!ensure(m_Barrel)) { return; }
 	FVector OutLaunchVelocity(0);
 	FVector StartLocation = m_Barrel->GetSocketLocation(FName("Projectile"));
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(
@@ -56,12 +53,12 @@ void UTankAimingComponent::AimAt(FVector _HitLocation, float _LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrel(FVector _AimDirection)
 {
-	if (ensure(m_Barrel) || ensure(m_Turret)) { return; }
+	if (!ensure(m_Barrel) || !ensure(m_Turret)) { return; }
 	//Work-out difference between current barrel reaction, and AimDirection
 	auto BarrelRotator = m_Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = _AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-	m_Barrel->Elevate(DeltaRotator.Pitch); // TODO remove magic number
+	m_Barrel->Elevate(DeltaRotator.Pitch);
 	m_Turret->Rotate(DeltaRotator.Yaw);
 }
 

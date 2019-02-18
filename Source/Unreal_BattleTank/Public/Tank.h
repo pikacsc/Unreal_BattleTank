@@ -22,6 +22,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
+	virtual void BeginPlay() override;
 
 protected:
 
@@ -39,8 +40,9 @@ private:
 
 	double		m_dLastFireTime = 0;
 
+	// TODO remove once firing is moved to aiming component
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float m_LaunchSpeed = 4000.f; //TODO find sensible default
+		float m_LaunchSpeed = 4000.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> m_ProjectileBlueprint;
