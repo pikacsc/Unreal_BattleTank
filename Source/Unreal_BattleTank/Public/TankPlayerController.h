@@ -8,19 +8,23 @@
 #include "TankPlayerController.generated.h" //
 
 class ATank;
-
+class UTankAimingComponent;
 /**
- * 
+ * Responsible for helping the player aim.
  */
 UCLASS()
 class UNREAL_BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-
-private:
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimingComponent* _AimCompRef);
+
+private:
 	void BeginPlay() override;
 
 	virtual void Tick( float _fDeltaTime ) override;

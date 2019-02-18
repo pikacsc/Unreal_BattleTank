@@ -2,6 +2,7 @@
 
 
 #include "Unreal_BattleTank/Public/TankPlayerController.h"
+#include "Unreal_BattleTank/Public/TankAimingComponent.h"
 #include "Unreal_BattleTank/Public/Tank.h"
 
 
@@ -85,5 +86,13 @@ ATank* ATankPlayerController::GetControlledTank() const
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
+	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (AimingComponent)
+	{
+		FoundAimingComponent(AimingComponent);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player controller can't find aiming component at Begin Play"));
+	}
 }
