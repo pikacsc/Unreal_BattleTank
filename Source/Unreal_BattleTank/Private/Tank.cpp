@@ -5,12 +5,12 @@
 #include "Projectile.h"
 #include "Engine/World.h"
 #include "Unreal_BattleTank/Public/TankAimingComponent.h"
-#include "Unreal_BattleTank/Public/TankMovementComponent.h"
 
 void ATank::Fire()
 {
+	if (!ensure(m_Barrel)) { return; }
 	bool isReloaded = (FPlatformTime::Seconds() - m_dLastFireTime) > m_fReloadTimeInSeconds; // Fire delay
-	if (m_Barrel && isReloaded)
+	if (isReloaded)
 	{
 		// Spawn a projectile at the socket location on the barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
@@ -35,7 +35,7 @@ ATank::ATank()
 
 void ATank::AimAt(FVector _HitLocation)
 {
-	if (!m_TankAimingComponent) { return; }
+	if (!ensure(m_TankAimingComponent)) { return; }
 	m_TankAimingComponent->AimAt(_HitLocation, m_LaunchSpeed);
 }
 

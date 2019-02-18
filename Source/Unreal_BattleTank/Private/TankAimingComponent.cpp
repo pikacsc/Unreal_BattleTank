@@ -27,7 +27,7 @@ void UTankAimingComponent::Initialize(UTankBarrel * _BarrelToSet, UTankTurret * 
 
 void UTankAimingComponent::AimAt(FVector _HitLocation, float _LaunchSpeed)
 {
-	if (!m_Barrel) { 
+	if (!ensure(m_Barrel)) { 
 		UE_LOG(LogTemp, Error, TEXT("No barrel object"));
 		return; 
 	}
@@ -56,7 +56,7 @@ void UTankAimingComponent::AimAt(FVector _HitLocation, float _LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrel(FVector _AimDirection)
 {
-	if (!m_Barrel || !m_Turret) { return; }
+	if (ensure(m_Barrel) || ensure(m_Turret)) { return; }
 	//Work-out difference between current barrel reaction, and AimDirection
 	auto BarrelRotator = m_Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = _AimDirection.Rotation();

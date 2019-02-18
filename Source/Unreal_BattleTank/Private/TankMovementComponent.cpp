@@ -15,7 +15,7 @@ void UTankMovementComponent::Initialize(UTankTrack* _LeftTrackToSet, UTankTrack*
 void UTankMovementComponent::IntendMoveForward(float _fThrow)
 {
 	//auto Time = GetWorld()->GetTimeSeconds();
-	if (!m_LeftTrack || !m_RightTrack) { return; }
+	if (!ensure(m_LeftTrack && m_RightTrack)) { return; }
 
 	m_LeftTrack->SetThrottle(_fThrow);
 	m_RightTrack->SetThrottle(_fThrow);
@@ -25,7 +25,7 @@ void UTankMovementComponent::IntendMoveForward(float _fThrow)
 void UTankMovementComponent::IntendTurnLeft(float _fThrow)
 {
 	//auto Time = GetWorld()->GetTimeSeconds();
-	if (!m_LeftTrack || !m_RightTrack) { return; }
+	if (!ensure(m_LeftTrack && m_RightTrack)) { return; }
 
 	m_LeftTrack->SetThrottle(-_fThrow);
 	m_RightTrack->SetThrottle(_fThrow);
@@ -53,7 +53,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector & _MoveVelocity, bo
 void UTankMovementComponent::IntendTurnRight(float _fThrow)
 {
 	//auto Time = GetWorld()->GetTimeSeconds();
-	if (!m_LeftTrack || !m_RightTrack) { return; }
+	if (!ensure(m_LeftTrack && m_RightTrack)) { return; }
 
 	m_LeftTrack->SetThrottle(_fThrow);
 	m_RightTrack->SetThrottle(-_fThrow);

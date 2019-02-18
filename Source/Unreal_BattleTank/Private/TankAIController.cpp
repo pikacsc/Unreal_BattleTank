@@ -22,7 +22,7 @@ void ATankAIController::Tick(float _fDeltaTime)
 	m_AITank = Cast<ATank>(GetPawn());
 
 
-	if (m_PlayerTank)
+	if (ensure(m_PlayerTank))
 	{
 		// TODO Move towards the player
 		MoveToActor(m_PlayerTank, m_AcceptanceRadius);
