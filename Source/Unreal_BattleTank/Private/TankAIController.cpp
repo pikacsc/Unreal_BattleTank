@@ -1,7 +1,8 @@
 // Copyrights JasonChoi(SEONG_CHAN) 2019
 
 #include "Unreal_BattleTank/Public/TankAIController.h"
-#include "Unreal_BattleTank/Public/Tank.h"
+#include "Unreal_BattleTank/Public/TankAimingComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "Engine/World.h"
 
 
@@ -15,23 +16,20 @@ void ATankAIController::BeginPlay()
 void ATankAIController::Tick(float _fDeltaTime)
 {
 	Super::Tick(_fDeltaTime);
-	//Get PlayerTank
-	m_PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-	//Get Controlled Tank
-	m_AITank = Cast<ATank>(GetPawn());
+	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto ControlledTank = GetPawn();
 
+	if (!ensure(PlayerTank && ControlledTank)) { return; }
 
-	if (ensure(m_PlayerTank))
-	{
-		// TODO Move towards the player
-		MoveToActor(m_PlayerTank, m_AcceptanceRadius);
+	// Move towards the player
+	MoveToActor(PlayerTank, m_AcceptanceRadius); // TODO check radius is in cm
 
-		// Aim towards the player 
-		m_AITank->AimAt(m_PlayerTank->GetActorLocation());
-		m_AITank->Fire();
-	}
+	// Aim towards the player
+	auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
+	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
+	AimingComponent->Fire();
 }
 
 
