@@ -29,4 +29,9 @@ public:
 private:
 	UTankProjectileMovementComponent* m_TankProjectileMovementComponent = nullptr;
 
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UStaticMeshComponent* m_CollisionMesh = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UParticleSystemComponent* m_LaunchBlast = nullptr;
 };
