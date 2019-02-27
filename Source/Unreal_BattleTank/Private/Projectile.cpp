@@ -31,6 +31,8 @@ AProjectile::AProjectile()
 	m_ImpactBlast->SetupAttachment(m_CollisionMesh);
 	m_ImpactBlast->bAutoActivate = false;
 
+	m_ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
+	m_ExplosionForce->SetupAttachment(m_CollisionMesh);
 }
 
 
@@ -53,4 +55,5 @@ void AProjectile::OnHit(UPrimitiveComponent * HitComp, AActor * OtherActor, UPri
 {
 	m_LaunchBlast->Deactivate();
 	m_ImpactBlast->Activate();
+	m_ExplosionForce->FireImpulse();
 }
