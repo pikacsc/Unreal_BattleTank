@@ -7,6 +7,9 @@
 #include "Particles/ParticleSystem.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "GameFramework/Actor.h"
+#include "Engine/Classes/Kismet/GameplayStatics.h"
+#include "Components/AudioComponent.h"
+#include "GameFramework/DamageType.h"
 #include "Components/StaticMeshComponent.h"
 #include "Unreal_BattleTank/Public/TankProjectileMovementComponent.h"
 
@@ -33,6 +36,9 @@ AProjectile::AProjectile()
 
 	m_ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
 	m_ExplosionForce->SetupAttachment(m_CollisionMesh);
+
+	m_ExplosionSound = CreateDefaultSubobject<UAudioComponent>(FName("ExplosionSound"));
+	m_ExplosionSound->SetupAttachment(m_CollisionMesh);
 }
 
 
@@ -57,12 +63,22 @@ void AProjectile::OnHit(UPrimitiveComponent * HitComp, AActor * OtherActor, UPri
 	m_ImpactBlast->Activate();
 	m_ExplosionForce->FireImpulse();
 
+	m_ExplosionSound->Play(0.f);
+
 	SetRootComponent(m_ImpactBlast);
 	m_CollisionMesh->DestroyComponent();
 
-	FTimerHandle Timer;
+	UGameplayStatics::ApplyRadialDamage(
+		this,
+		m_fDestroyDelay,
+		GetActorLocation(),
+		m_ExplosionForce->Radius,
+		UDamageType::StaticClass(),
+		TArray<AActor*>()
+	);
 
-	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, m_DestroyDelay, false);
+	FTimerHandle Timer;
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, m_fDestroyDelay, false);
 }
 
 void AProjectile::OnTimerExpire()

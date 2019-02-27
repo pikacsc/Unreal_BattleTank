@@ -41,8 +41,15 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	URadialForceComponent*	  m_ExplosionForce = nullptr;
 
+
+	UPROPERTY(VisibleAnywhere, Category = "Audio")
+	UAudioComponent* m_ExplosionSound;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-		float				m_DestroyDelay = 10.f;
+	float				m_fDestroyDelay = 10.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float				m_fProjectileDamage = 20.f;
 
 
 	UFUNCTION()
