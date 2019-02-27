@@ -21,10 +21,8 @@ public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// Called every frame
-	virtual void Tick(float _fDeltaTime) override;
-
 	void LaunchProjectile(float _fSpeed);
+
 
 private:
 	UTankProjectileMovementComponent* m_TankProjectileMovementComponent = nullptr;
@@ -34,4 +32,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent* m_LaunchBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UParticleSystemComponent* m_ImpactBlast = nullptr;
+	
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent * HitComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, FVector NormalImpulse, const FHitResult & Hit);
 };
