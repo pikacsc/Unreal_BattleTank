@@ -10,7 +10,7 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
+	m_iCurrentHealth = m_iStartingHealth;
 }
 
 float ATank::TakeDamage(float _fDamageAmount, struct FDamageEvent const & _DamageEvent, class AController * _EventInstigator, AActor * _DamageCauser)
@@ -20,6 +20,7 @@ float ATank::TakeDamage(float _fDamageAmount, struct FDamageEvent const & _Damag
 
 	m_iCurrentHealth -= DamageToApply;
 	//if(m_iCurrentHealth <= 0)
-	
+	//TODO GameOver
+
 	return DamageToApply;
 }
