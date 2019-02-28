@@ -20,11 +20,17 @@ protected:
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* _AimCompRef);
+	
+	UFUNCTION()
+	void OnPossedTankDeath();
 
 private:
 	void BeginPlay() override;
 
 	virtual void Tick( float _fDeltaTime ) override;
+
+	virtual void SetPawn(APawn* _InPawn) override;
+
 
 	// start the tank moving the barrel so that a shot would it where
 	// the crosshair intersects the world

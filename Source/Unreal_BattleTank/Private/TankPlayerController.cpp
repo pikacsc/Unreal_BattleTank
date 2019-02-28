@@ -3,12 +3,30 @@
 
 #include "Unreal_BattleTank/Public/TankPlayerController.h"
 #include "Unreal_BattleTank/Public/TankAimingComponent.h"
-
+#include "Tank.h"
 
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimTowardsCrosshair();
+}
+
+void ATankPlayerController::SetPawn(APawn * _InPawn)
+{
+	Super::SetPawn(_InPawn);
+	if (_InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(_InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		//TODO Subscribe our local method to the tank's death event
+		PossessedTank->m_OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossedTankDeath);
+	}
+}
+
+void ATankPlayerController::OnPossedTankDeath() //GameOver
+{
+	StartSpectatingOnly();
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
