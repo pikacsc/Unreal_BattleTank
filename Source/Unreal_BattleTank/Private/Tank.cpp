@@ -19,8 +19,10 @@ float ATank::TakeDamage(float _fDamageAmount, struct FDamageEvent const & _Damag
 	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, m_iCurrentHealth);
 
 	m_iCurrentHealth -= DamageToApply;
-	//if(m_iCurrentHealth <= 0)
-	//TODO GameOver
-
+	if (m_iCurrentHealth <= 0)
+	{
+		m_OnDeath.Broadcast();
+	}
+		
 	return DamageToApply;
 }

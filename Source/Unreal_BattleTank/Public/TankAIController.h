@@ -23,9 +23,13 @@ protected:
 private:
 	virtual void BeginPlay() override;
 
+
+	virtual void SetPawn(APawn* _InPawn) override;
+
 	// Called every frame
 	virtual void Tick(float _fDeltaTime) override;
 
-
+	UFUNCTION()
+	void OnPossedTankDeath();
 
 };
