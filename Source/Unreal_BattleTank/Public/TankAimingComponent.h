@@ -60,7 +60,6 @@ private:
 	UTankBarrel* m_Barrel = nullptr;
 	UTankTurret* m_Turret = nullptr;
 
-
 	// TODO remove once firing is moved to aiming component
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float m_LaunchSpeed = 4000.f;

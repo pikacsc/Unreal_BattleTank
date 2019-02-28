@@ -43,6 +43,9 @@ private:
 
 
 	UPROPERTY(VisibleAnywhere, Category = "Audio")
+	UAudioComponent* m_FireSound;
+
+	UPROPERTY(VisibleAnywhere, Category = "Audio")
 	UAudioComponent* m_ExplosionSound;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")

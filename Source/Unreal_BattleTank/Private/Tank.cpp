@@ -2,6 +2,7 @@
 
 #include "Unreal_BattleTank/Public/Tank.h"
 
+
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
@@ -33,6 +34,7 @@ float ATank::TakeDamage(float _fDamageAmount, struct FDamageEvent const & _Damag
 	if (m_iCurrentHealth <= 0)
 	{
 		m_OnDeath.Broadcast();
+		
 	}
 		
 	return DamageToApply;

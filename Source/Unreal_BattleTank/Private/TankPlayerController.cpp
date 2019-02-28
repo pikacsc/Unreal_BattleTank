@@ -3,6 +3,8 @@
 
 #include "Unreal_BattleTank/Public/TankPlayerController.h"
 #include "Unreal_BattleTank/Public/TankAimingComponent.h"
+#include "Engine/World.h"
+#include "Engine/Classes/Kismet/GameplayStatics.h"
 #include "Tank.h"
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -27,6 +29,7 @@ void ATankPlayerController::SetPawn(APawn * _InPawn)
 void ATankPlayerController::OnPossedTankDeath() //GameOver
 {
 	StartSpectatingOnly();
+	UGameplayStatics::OpenLevel(GetWorld(), "GameOver");
 }
 
 void ATankPlayerController::AimTowardsCrosshair()

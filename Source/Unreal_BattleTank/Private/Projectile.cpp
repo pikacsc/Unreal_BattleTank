@@ -37,6 +37,9 @@ AProjectile::AProjectile()
 	m_ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
 	m_ExplosionForce->SetupAttachment(m_CollisionMesh);
 
+	m_FireSound = CreateDefaultSubobject<UAudioComponent>(FName("FireSound"));
+	m_FireSound->SetupAttachment(m_CollisionMesh);
+
 	m_ExplosionSound = CreateDefaultSubobject<UAudioComponent>(FName("ExplosionSound"));
 	m_ExplosionSound->SetupAttachment(m_CollisionMesh);
 }
@@ -52,6 +55,7 @@ void AProjectile::BeginPlay()
 
 void AProjectile::LaunchProjectile(float _fSpeed)
 {
+	m_FireSound->Play(0.f);
 	m_TankProjectileMovementComponent->SetVelocityInLocalSpace(FVector::ForwardVector* _fSpeed);
 	m_TankProjectileMovementComponent->Activate();
 }
