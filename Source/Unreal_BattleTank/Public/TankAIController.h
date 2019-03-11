@@ -29,7 +29,7 @@ private:
 	// Called every frame
 	virtual void Tick(float _fDeltaTime) override;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = "Death")
 	void OnPossedTankDeath();
 
 };

@@ -7,6 +7,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	m_iCurrentHealth = m_iStartingHealth;
+
 }
 
 

@@ -21,7 +21,7 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* _AimCompRef);
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = "Death")
 	void OnPossedTankDeath();
 
 private:

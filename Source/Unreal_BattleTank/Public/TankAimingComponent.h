@@ -41,6 +41,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	int32 GetRoundsLeft() const;
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	float GetReloadingTime() const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState m_FiringState = EFiringState::Reloading;
@@ -74,6 +77,8 @@ private:
 	int32		m_iRoundsLeft = 3;
 
 	double		m_dLastFireTime = 0;
+
+	float		m_CurrentReloadingTime;
 
 	FVector		m_fAimDirection;
 };
