@@ -27,15 +27,17 @@ public:
 
 	FTankDelegate m_OnDeath;
 
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	int32 m_iStartingHealth = 100;
+
 private:
 	// Sets default values for this pawn's properties
 	ATank();
 
 
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	int32 m_iStartingHealth = 100;
 
-	UPROPERTY(VisibleAnywhere, Category = "Health")
+	//UPROPERTY(VisibleAnywhere, Category = "Health")
 	int32 m_iCurrentHealth;
 
 
