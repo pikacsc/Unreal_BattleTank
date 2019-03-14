@@ -53,6 +53,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 		float m_fLineTraceRange = 1000000.f;
 
+
 };
 
 

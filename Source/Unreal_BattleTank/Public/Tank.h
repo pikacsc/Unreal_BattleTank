@@ -27,9 +27,16 @@ public:
 
 	FTankDelegate m_OnDeath;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 m_iStartingHealth = 100;
+
+
+	UPROPERTY(EditAnywhere)
+		int32   m_iEnemyDestroyed = 0;
+
+	UPROPERTY(EditAnywhere)
+		float m_fClearTime = 0.f;
+
 
 private:
 	// Sets default values for this pawn's properties

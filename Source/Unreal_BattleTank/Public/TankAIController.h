@@ -32,4 +32,5 @@ private:
 	UFUNCTION(BlueprintCallable, Category = "Death")
 	void OnPossedTankDeath();
 
+
 };
